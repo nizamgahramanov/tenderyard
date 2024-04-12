@@ -27,13 +27,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     RegisterListTileParams(
       title: "Fiziki şəxs",
       description: "Bütün fəaliyyətlərinizi idarə etmək üçün şəxsi hesab.",
-      onTapScreen: Screens.registerAsIndividual,
+      onTapScreen: Screens.registerAsJuridicalPerson,
       leadingIconPath: Assets.individual,
     ),
     RegisterListTileParams(
       title: "Fərdi sahibkar",
       description: "Bütün fəaliyyətlərinizi idarə etmək üçün şəxsi hesab.",
-      onTapScreen: Screens.registerAsIndividualOwner,
+      onTapScreen: Screens.registerAsJuridicalPerson,
       leadingIconPath: Assets.individualOwner,
     ),
     RegisterListTileParams(
@@ -68,7 +68,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Assets.logo,
                       fit: BoxFit.cover,
                       height: 40.h,
-                      width: 180.w,
                     ),
                     const SizedBox(
                       height: 8,
@@ -123,8 +122,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               _navigateToNextScreen(context,
                                   registerListTileParams[index].onTapScreen);
                             },
-                            /*              onTap: () => Navigator.pushNamed(context,
-                                      registerListTileParams[index].onTapScreen), */
                             title: Text(
                               registerListTileParams[index].title,
                               style: StyleUtils.boldTitle(context)!.copyWith(

@@ -8,8 +8,11 @@ import 'package:tenderyard/feature/app/app_theme/style_utils.dart';
 import 'package:tenderyard/feature/app/injection_container.dart';
 import 'package:tenderyard/feature/register/data/models/text_form_field_params.dart';
 import 'package:tenderyard/feature/register/presentation/bloc/bloc.dart';
+import 'package:tenderyard/feature/register/presentation/widgets/custom_icon.dart';
+import 'package:tenderyard/feature/register/presentation/widgets/location.dart';
+import 'package:tenderyard/feature/register/presentation/widgets/shadow_text_form_field.dart';
 
-class BottomPart extends StatelessWidget {
+class BottomPart extends StatefulWidget {
   const BottomPart({
     super.key,
     required this.flexValueOfBottom,
@@ -18,86 +21,93 @@ class BottomPart extends StatelessWidget {
   final int flexValueOfBottom;
 
   @override
+  State<BottomPart> createState() => _BottomPartState();
+}
+
+class _BottomPartState extends State<BottomPart> {
+  final List<FieldParams> textFormFieldParams = [
+    FieldParams(
+        id: 1,
+        title: "Ad*",
+        hintText: "Nizam",
+        focusNode: FocusNode(),
+        textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.name,
+        type: FieldType.textFormField),
+    FieldParams(
+        id: 2,
+        title: "E-mail",
+        hintText: "tenderyard@gmail.com",
+        focusNode: FocusNode(),
+        textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.emailAddress,
+        type: FieldType.textFormField),
+    FieldParams(
+        id: 3,
+        title: "Telefon nömrəsi*",
+        hintText: "050-000-00-00",
+        focusNode: FocusNode(),
+        textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.phone,
+        type: FieldType.textFormField),
+    FieldParams(
+      id: 4,
+      title: "Faktiki ünvan*",
+      hintText: "Babək prospekti 104",
+      focusNode: FocusNode(),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.streetAddress,
+      type: FieldType.textFormField,
+      trailingIcon: const Location(),
+    ),
+    FieldParams(
+      id: 5,
+      title: "VÖEN",
+      hintText: "00-000-00-00",
+      focusNode: FocusNode(),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.number,
+      type: FieldType.textFormField,
+    ),
+    FieldParams(
+      id: 6,
+      title: "Fəaliyyət sahəsi*",
+      focusNode: FocusNode(),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.text,
+      dropdownItems: ["Elektronika", "Fizika", "Komputer"],
+      type: FieldType.dropdown,
+      trailingIcon: const CustomIcon(),
+    ),
+    FieldParams(
+      id: 7,
+      title: "Maraqlandığınız kateqoriyalar*",
+      focusNode: FocusNode(),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.text,
+      dropdownItems: ["Elektronika", "Fizika", "Komputer"],
+      type: FieldType.dropdown,
+      trailingIcon: const CustomIcon(),
+    ),
+    FieldParams(
+      id: 8,
+      title: "Logo",
+      focusNode: FocusNode(),
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.text,
+      type: FieldType.container,
+    ),
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    final List<FieldParams> textFormFieldParams = [
-      FieldParams(
-          id: 1,
-          title: "Ad*",
-          hintText: "Nizam",
-          focusNode: FocusNode(),
-          textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.name,
-          type: FieldType.textFormField),
-      FieldParams(
-          id: 2,
-          title: "E-mail",
-          hintText: "tenderyard@gmail.com",
-          focusNode: FocusNode(),
-          textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.emailAddress,
-          type: FieldType.textFormField),
-      FieldParams(
-          id: 3,
-          title: "Telefon nömrəsi*",
-          hintText: "050-000-00-00",
-          focusNode: FocusNode(),
-          textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.phone,
-          type: FieldType.textFormField),
-      FieldParams(
-          id: 4,
-          title: "Faktiki ünvan*",
-          hintText: "Babək prospekti 104",
-          focusNode: FocusNode(),
-          textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.streetAddress,
-          type: FieldType.textFormField,
-          trailingIcon: _buildLocation()),
-      FieldParams(
-        id: 5,
-        title: "VÖEN",
-        hintText: "00-000-00-00",
-        focusNode: FocusNode(),
-        textInputAction: TextInputAction.next,
-        keyboardType: TextInputType.number,
-        type: FieldType.textFormField,
-      ),
-      FieldParams(
-        id: 6,
-        title: "Fəaliyyət sahəsi*",
-        focusNode: FocusNode(),
-        textInputAction: TextInputAction.next,
-        keyboardType: TextInputType.text,
-        dropdownItems: ["Elektronika", "Fizika", "Komputer"],
-        type: FieldType.dropdown,
-        trailingIcon: _buildIcon(),
-      ),
-      FieldParams(
-        id: 7,
-        title: "Maraqlandığınız kateqoriyalar*",
-        focusNode: FocusNode(),
-        textInputAction: TextInputAction.next,
-        keyboardType: TextInputType.text,
-        dropdownItems: ["Elektronika", "Fizika", "Komputer"],
-        type: FieldType.dropdown,
-        trailingIcon: _buildIcon(),
-      ),
-      FieldParams(
-        id: 8,
-        title: "Logo",
-        focusNode: FocusNode(),
-        textInputAction: TextInputAction.next,
-        keyboardType: TextInputType.text,
-        type: FieldType.container,
-      ),
-    ];
     final registerBloc = sl.get<RegisterBloc>();
     return BlocProvider(
       create: (context) => registerBloc,
       child: BlocBuilder<RegisterBloc, RegisterState>(
         builder: (context, state) {
           return Expanded(
-            flex: flexValueOfBottom,
+            flex: widget.flexValueOfBottom,
             child: Form(
               child: ListView.builder(
                 itemCount: textFormFieldParams.length,
@@ -126,99 +136,151 @@ class BottomPart extends StatelessWidget {
                           height: 10,
                         ),
                         if (fieldParam.type == FieldType.textFormField)
-                          TextFormField(
-                            focusNode: textFormFieldParams[index].focusNode,
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: textFormFieldParams[index].hintText,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 8.h, horizontal: 12.w),
-                              hintStyle:
-                                  StyleUtils.bodyRegular(context)!.copyWith(
-                                color: ColorUtils.tertiaryColor,
-                              ),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
+                          Container(
+                            decoration: state.selectedFieldIndex == index
+                                ? BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        spreadRadius: 3,
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  )
+                                : null,
+                            child: ShadowTextFormField(
+                              focusNode: textFormFieldParams[index].focusNode!,
+                              initialValue:
+                                  state.fieldTexts[index.toString()] ?? '',
+                              style: const TextStyle(
+                                  color: ColorUtils.bodySecondaryTextColor),
+                              decoration: InputDecoration(
+                                filled: true,
+                                hintText: textFormFieldParams[index].hintText,
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 8.h, horizontal: 12.w),
+                                hintStyle:
+                                    StyleUtils.bodyRegular(context)!.copyWith(
                                   color: ColorUtils.tertiaryColor,
-                                  width: 1,
                                 ),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: ColorUtils.primaryColor,
-                                  width: 1,
-                                ),
-                              ),
-                              suffixIcon:
-                                  textFormFieldParams[index].trailingIcon,
-                              suffixIconColor: ColorUtils.tertiaryColor,
-                            ),
-                            textInputAction:
-                                textFormFieldParams[index].textInputAction,
-                            keyboardType:
-                                textFormFieldParams[index].keyboardType,
-                            onChanged: (value) {
-                              registerBloc.add(
-                                UpdateFieldEvent(
-                                  textFormFieldParams[index].id,
-                                  value,
-                                ),
-                              );
-                            },
-                          ),
-                        if (fieldParam.type == FieldType.dropdown)
-                          DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: textFormFieldParams[index].hintText,
-                              contentPadding: EdgeInsets.symmetric(
-                                vertical: 8.h,
-                                horizontal: 12.w,
-                              ),
-                              hintStyle:
-                                  StyleUtils.bodyRegular(context)!.copyWith(
-                                color: ColorUtils.tertiaryColor,
-                              ),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: ColorUtils.tertiaryColor,
-                                  width: 1,
-                                ),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: ColorUtils.primaryColor,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                            value:
-                                textFormFieldParams[index].dropdownItems!.first,
-                            items: textFormFieldParams[index]
-                                .dropdownItems!
-                                .map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style:
-                                      StyleUtils.bodyRegular(context)!.copyWith(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
                                     color: ColorUtils.tertiaryColor,
+                                    width: 1,
                                   ),
                                 ),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              textFormFieldParams[index].dropdownItems!.first =
-                                  newValue!;
-                              registerBloc.add(
-                                UpdateFieldEvent(
-                                  textFormFieldParams[index].id,
-                                  newValue,
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorUtils.primaryColor,
+                                    width: 1,
+                                  ),
                                 ),
-                              );
-                            },
-                            icon: textFormFieldParams[index].trailingIcon,
+                                suffixIcon: state.fieldTexts.containsKey(
+                                            textFormFieldParams[index].id) &&
+                                        state
+                                            .fieldTexts[
+                                                textFormFieldParams[index].id]!
+                                            .isNotEmpty
+                                    ? IconButton(
+                                        icon: const Icon(Icons.clear),
+                                        onPressed: () {
+                                          registerBloc.add(
+                                            UpdateFieldEvent(
+                                              textFormFieldParams[index].id,
+                                              '',
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : textFormFieldParams[index].trailingIcon,
+                                suffixIconColor: ColorUtils.tertiaryColor,
+                              ),
+                              textInputAction:
+                                  textFormFieldParams[index].textInputAction,
+                              keyboardType:
+                                  textFormFieldParams[index].keyboardType,
+                              onChanged: (value) {
+                                registerBloc.add(
+                                  UpdateFieldEvent(
+                                    textFormFieldParams[index].id,
+                                    value,
+                                  ),
+                                );
+                              },
+                              /* onTap: () =>
+                                  registerBloc.add(FieldSelecteEvent(index)), */
+                            ),
+                          ),
+                        if (fieldParam.type == FieldType.dropdown)
+                          Container(
+                            decoration: state.selectedFieldIndex == index
+                                ? BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        spreadRadius: 3,
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  )
+                                : null,
+                            child: DropdownButtonFormField<String>(
+                              decoration: InputDecoration(
+                                filled: true,
+                                hintText: textFormFieldParams[index].hintText,
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 8.h,
+                                  horizontal: 12.w,
+                                ),
+                                hintStyle:
+                                    StyleUtils.bodyRegular(context)!.copyWith(
+                                  color: ColorUtils.tertiaryColor,
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorUtils.tertiaryColor,
+                                    width: 1,
+                                  ),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorUtils.primaryColor,
+                                    width: 1,
+                                  ),
+                                ),
+                              ),
+                              value: textFormFieldParams[index]
+                                  .dropdownItems!
+                                  .first,
+                              items: textFormFieldParams[index]
+                                  .dropdownItems!
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: StyleUtils.bodyRegular(context)!
+                                        .copyWith(
+                                      color: ColorUtils.tertiaryColor,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                textFormFieldParams[index]
+                                    .dropdownItems!
+                                    .first = newValue!;
+                                registerBloc.add(
+                                  UpdateFieldEvent(
+                                    textFormFieldParams[index].id,
+                                    newValue,
+                                  ),
+                                );
+                              },
+                              icon: textFormFieldParams[index].trailingIcon,
+                            ),
                           ),
                         if (fieldParam.type == FieldType.container)
                           Stack(
@@ -261,14 +323,14 @@ class BottomPart extends StatelessWidget {
     );
   }
 
-  Icon _buildIcon() {
+  Icon get _buildIcon {
     return const Icon(
       Icons.keyboard_arrow_down,
       color: ColorUtils.tertiaryColor,
     );
   }
 
-  Widget _buildLocation() {
+  Widget get _buildLocation {
     return Stack(
       alignment: Alignment.center,
       children: [

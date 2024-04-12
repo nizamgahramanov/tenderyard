@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tenderyard/core/api_client/api_response.dart';
 import 'package:tenderyard/feature/register/data/models/user_data_model.dart';

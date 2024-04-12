@@ -81,7 +81,7 @@ class _JuridicalPersonScreenState extends State<JuridicalPersonScreen> {
                         ],
                       ),
                       Positioned(
-                        top: topPosition-30,
+                        top: topPosition-50,
                         left: 0,
                         right: 0,
                         child: IntersectionPart(

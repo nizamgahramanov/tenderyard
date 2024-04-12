@@ -20,7 +20,7 @@ class TopPart extends StatelessWidget {
         children: [
           SvgPicture.asset(
             Assets.juridicalPersonPage,
-            fit: BoxFit.cover,
+            fit: BoxFit.fitWidth,
           ),
           Positioned(
             top: (MediaQuery.of(context).size.height/flexValueOfTop)/2.7,
@@ -30,7 +30,7 @@ class TopPart extends StatelessWidget {
               widthFactor: 0.5, 
               child: Image.asset(
                 Assets.tenderyard,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
               ),
             ),
           ),

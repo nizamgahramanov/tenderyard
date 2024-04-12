@@ -2,52 +2,29 @@ part of 'bloc.dart';
 
 class RegisterState {
   final ApiResponse? apiResponse;
+  final Map<int, String> fieldTexts;
   final int selectedIndex;
-  final String name;
-  final String? email;
-  final String phoneNumber;
-  final String address;
-  final String? voen;
-  final String activityArea;
-  final String interestCategory;
-  final String? logo;
+  final int selectedFieldIndex;
 
   RegisterState({
+
     this.apiResponse,
+    this.fieldTexts=const {},
     this.selectedIndex = -1,
-    this.name = '',
-    this.email = '',
-    this.phoneNumber = '',
-    this.address = '',
-    this.voen = '',
-    this.activityArea = '',
-    this.interestCategory = '',
-    this.logo = '',
+    this.selectedFieldIndex = -1,
   });
 
   RegisterState copyWith({
     ApiResponse? apiResponse,
+    Map<int, String>? fieldTexts,
     int? selectedIndex,
-    String? name,
-    String? email,
-    String? phoneNumber,
-    String? address,
-    String? voen,
-    String? activityArea,
-    String? interestCategory,
-    String? logo,
+    int? selectedFieldIndex,
   }) {
     return RegisterState(
       apiResponse: apiResponse ?? this.apiResponse,
+      fieldTexts: fieldTexts ?? this.fieldTexts,
       selectedIndex: selectedIndex ?? this.selectedIndex,
-      name: name ?? this.name,
-      email: email ?? this.email,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-      address: address ?? this.address,
-      voen: voen ?? this.voen,
-      activityArea: activityArea ?? this.activityArea,
-      interestCategory: interestCategory ?? this.interestCategory,
-      logo: logo ?? this.logo,
+      selectedFieldIndex: selectedFieldIndex ?? this.selectedFieldIndex,
     );
   }
 }

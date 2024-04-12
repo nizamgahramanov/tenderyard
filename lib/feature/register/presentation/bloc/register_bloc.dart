@@ -11,24 +11,23 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }) : super(RegisterState()) {
     on<RegisterAsJuridicalPersonClicked>(_registerAsJuridicalPerson);
     on<TileSelectedEvent>(_tileSelected);
+    on<FieldSelecteEvent>(_fieldSelected);
     on<UpdateFieldEvent>(_updateField);
   }
 
   Future<void> _registerAsJuridicalPerson(
       RegisterAsJuridicalPersonClicked event, emit) async {
     try {
-      debugPrint("Clicked");
-      debugPrint(state.email);
       registerAsJuridicalPerson.call(Params(
           userDataModel: UserDataModel(
-        name: state.name,
-        email: state.email,
-        phoneNumber: state.phoneNumber,
-        address: state.address,
-        voen: state.voen,
-        activityArea: state.activityArea,
-        interestCategory: state.interestCategory,
-        logo: state.logo,
+        name: state.fieldTexts[1] ?? '',
+        email: state.fieldTexts[2] ?? '',
+        phoneNumber: state.fieldTexts[3] ?? '',
+        address: state.fieldTexts[4] ?? '',
+        voen: state.fieldTexts[5] ?? '',
+        activityArea: state.fieldTexts[6] ?? '',
+        interestCategory: state.fieldTexts[7] ?? '',
+        logo: state.fieldTexts[8] ?? '',
       )));
     } on Error {}
   }
@@ -38,35 +37,19 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(state.copyWith(selectedIndex: event.selectedIndex));
   }
 
+  FutureOr<void> _fieldSelected(
+      FieldSelecteEvent event, Emitter<RegisterState> emit) {
+    emit(state.copyWith(selectedFieldIndex: event.selectedFieldIndex));
+  }
+
   FutureOr<void> _updateField(
       UpdateFieldEvent event, Emitter<RegisterState> emit) {
-    debugPrint(event.value);
-    switch (event.id) {
-      case 1:
-      debugPrint("asdas");
-        emit(state.copyWith(name: event.value));
-        break;
-      case 2:
-        emit(state.copyWith(email: event.value));
-        break;
-      case 3:
-        emit(state.copyWith(phoneNumber: event.value));
-        break;
-      case 4:
-        emit(state.copyWith(address: event.value));
-        break;
-      case 5:
-        emit(state.copyWith(voen: event.value));
-        break;
-      case 6:
-        emit(state.copyWith(activityArea: event.value));
-        break;
-      case 7:
-        emit(state.copyWith(interestCategory: event.value));
-        break;
-      case 8:
-        emit(state.copyWith(logo: event.value));
-        break;
+    final Map<int, String> updatedFieldTexts = Map.from(state.fieldTexts);
+    updatedFieldTexts[event.id] = event.value;
+    emit(state.copyWith(fieldTexts: updatedFieldTexts));
+    if (event.value.isEmpty) {
+      updatedFieldTexts.remove(event.id);
+      emit(state.copyWith(fieldTexts: updatedFieldTexts));
     }
   }
 }

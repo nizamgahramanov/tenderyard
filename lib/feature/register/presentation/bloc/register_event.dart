@@ -12,6 +12,12 @@ class TileSelectedEvent extends RegisterEvent {
   TileSelectedEvent(this.selectedIndex);
 }
 
+class FieldSelecteEvent extends RegisterEvent {
+  final int selectedFieldIndex;
+
+  FieldSelecteEvent(this.selectedFieldIndex);
+}
+
 class UpdateFieldEvent extends RegisterEvent {
   final int id;
   final String value;
